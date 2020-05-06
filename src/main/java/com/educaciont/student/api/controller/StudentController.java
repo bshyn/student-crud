@@ -2,15 +2,16 @@
 package com.educaciont.student.api.controller;
 
 
-import com.educaciont.student.api.model.StudentModel;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.bind.annotation.*;
+
+import com.educaciont.student.api.model.StudentModel;
+import com.educaciont.student.api.service.IStudentService;
 
 
 @RestController
@@ -18,16 +19,55 @@ import java.util.List;
 public class StudentController {
 
 
+    @Autowired
+    private IStudentService<StudentModel> service;
+
+
     @RequestMapping (method = RequestMethod.GET)
     public ResponseEntity<?> getAll () {
 
+        List<StudentModel> list = this.service.findAll();
 
-        List<StudentModel> list = new ArrayList<>();
+        if (list.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok (list);
+        }
+    }
 
-        list.add (new StudentModel ("Homer", "Simpson", "90909098", "hsimpson@gmail.com", "1512121212"));
-        list.add (new StudentModel ("Bart", "Simpson", "90909046", "bsimpson@gmail.com", "1515121213"));
+    @RequestMapping (value = "/{dni}", method = RequestMethod.GET)
+    public ResponseEntity<?> getByDni (@PathVariable("dni") String dni) {
 
+        StudentModel model = this.service.findByDni (dni);
 
-        return ResponseEntity.ok(list);
+        if (model == null) {
+            return new ResponseEntity<> (String.format ("Student by DNI %s", dni), HttpStatus.NOT_FOUND);
+        } else {
+            return ResponseEntity.ok (model);
+        }
+    }
+
+    @RequestMapping (method = RequestMethod.POST)
+    public ResponseEntity<?> create (@RequestBody StudentModel model) {
+
+        this.service.create (model);
+
+        return new ResponseEntity (HttpStatus.CREATED);
+    }
+
+    @RequestMapping (value = "/{dni}", method = RequestMethod.PUT)
+    public ResponseEntity<?> update (@PathVariable("dni") String dni, @RequestBody StudentModel model) {
+
+        this.service.update (model);
+
+        return ResponseEntity.ok(model);
+    }
+
+    @RequestMapping (value = "/{dni}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> delete (@PathVariable("dni") String dni) {
+
+        this.service.delete (dni);
+
+        return ResponseEntity.noContent().build();
     }
 }

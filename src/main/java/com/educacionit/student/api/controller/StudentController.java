@@ -1,5 +1,5 @@
 
-package com.educaciont.student.api.controller;
+package com.educacionit.student.api.controller;
 
 
 import java.util.List;
@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.educaciont.student.api.model.StudentModel;
-import com.educaciont.student.api.service.IStudentService;
+import com.educacionit.student.api.model.StudentModel;
+import com.educacionit.student.api.service.IStudentService;
 
 
 @RestController
@@ -37,37 +37,26 @@ public class StudentController {
 
     @RequestMapping (value = "/{dni}", method = RequestMethod.GET)
     public ResponseEntity<?> getByDni (@PathVariable("dni") String dni) {
-
         StudentModel model = this.service.findByDni (dni);
-
-        if (model == null) {
-            return new ResponseEntity<> (String.format ("Student by DNI %s", dni), HttpStatus.NOT_FOUND);
-        } else {
-            return ResponseEntity.ok (model);
-        }
+        return ResponseEntity.ok (model);
     }
 
     @RequestMapping (method = RequestMethod.POST)
     public ResponseEntity<?> create (@RequestBody StudentModel model) {
-
         this.service.create (model);
-
-        return new ResponseEntity (HttpStatus.CREATED);
+        return new ResponseEntity (model, HttpStatus.CREATED);
     }
 
-    @RequestMapping (value = "/{dni}", method = RequestMethod.PUT)
+    @RequestMapping (
+            value = "/{dni}", method = RequestMethod.PUT)
     public ResponseEntity<?> update (@PathVariable("dni") String dni, @RequestBody StudentModel model) {
-
         this.service.update (model);
-
         return ResponseEntity.ok(model);
     }
 
     @RequestMapping (value = "/{dni}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete (@PathVariable("dni") String dni) {
-
         this.service.delete (dni);
-
         return ResponseEntity.noContent().build();
     }
 }

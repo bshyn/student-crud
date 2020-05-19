@@ -1,4 +1,4 @@
-package com.educaciont;
+package com.educacionit;
 
 
 import org.springframework.boot.SpringApplication;

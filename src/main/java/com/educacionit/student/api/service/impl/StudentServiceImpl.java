@@ -9,16 +9,12 @@ import java.util.stream.Collectors;
 import com.educacionit.student.api.entity.StudentEntity;
 import com.educacionit.student.api.exception.ConflictException;
 import com.educacionit.student.api.exception.NotFoundException;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.educacionit.student.api.model.StudentModel;
 import com.educacionit.student.api.repository.IStudentRepository;
 import com.educacionit.student.api.service.IStudentService;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
 
 
 @Service ("studentServiceBean")

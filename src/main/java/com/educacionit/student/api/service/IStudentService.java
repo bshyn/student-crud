@@ -2,11 +2,6 @@
 package com.educacionit.student.api.service;
 
 
-import com.educacionit.student.api.exception.ConflictException;
-import com.educacionit.student.api.exception.NotFoundException;
-
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 

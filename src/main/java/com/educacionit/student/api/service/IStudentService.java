@@ -1,12 +1,11 @@
 
-package com.educaciont.student.api.service;
+package com.educacionit.student.api.service;
 
 
 import java.util.List;
 
 
 public interface IStudentService<T> {
-
 
     List<T> findAll ();
 

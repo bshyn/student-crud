@@ -26,17 +26,14 @@ import lombok.*;
 public class StudentEntity {
 
     @Id
-    @NotNull(message = "Dni shouldn't be null")
     @NotEmpty(message = "Dni shouldn't be empty")
     @Size(min = 5, max = 15)
     private String dni;
 
-    @NotNull(message = "Name shouldn't be null")
     @NotEmpty(message = "Name shouldn't be empty")
     @Column(name = "FIRST_NAME", length = 30)
     private String name;
 
-    @NotNull(message = "Last Name shouldn't be null")
     @NotEmpty(message = "Last Name shouldn't be empty")
     @Column(name = "LAST_NAME", length = 30)
     private String lastName;
@@ -44,7 +41,6 @@ public class StudentEntity {
     @Size(min = 5, max = 50)
     private String email;
 
-    @NotNull(message = "Mobile shouldn't be null")
     @NotEmpty(message = "Mobile shouldn't be empty")
     @Size(min = 4, max = 20)
     private String mobile;

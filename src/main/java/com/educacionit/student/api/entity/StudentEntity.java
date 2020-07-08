@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -25,21 +26,22 @@ import lombok.*;
 public class StudentEntity {
 
     @Id
+    @NotEmpty(message = "Dni shouldn't be empty")
     @Size(min = 5, max = 15)
     private String dni;
 
-    @NotNull
+    @NotEmpty(message = "Name shouldn't be empty")
     @Column(name = "FIRST_NAME", length = 30)
     private String name;
 
-    @NotNull
+    @NotEmpty(message = "Last Name shouldn't be empty")
     @Column(name = "LAST_NAME", length = 30)
     private String lastName;
 
     @Size(min = 5, max = 50)
     private String email;
 
-    @NotNull
+    @NotEmpty(message = "Mobile shouldn't be empty")
     @Size(min = 4, max = 20)
     private String mobile;
 

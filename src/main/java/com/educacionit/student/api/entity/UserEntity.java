@@ -1,4 +1,4 @@
-package com.educaciont.student.api.entity;
+package com.educacionit.student.api.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

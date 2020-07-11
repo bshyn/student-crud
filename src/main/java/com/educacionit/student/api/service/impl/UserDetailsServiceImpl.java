@@ -1,7 +1,7 @@
-package com.educaciont.student.api.service.impl;
+package com.educacionit.student.api.service.impl;
 
-import com.educaciont.student.api.entity.UserEntity;
-import com.educaciont.student.api.repository.UserRepository;
+import com.educacionit.student.api.entity.UserEntity;
+import com.educacionit.student.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

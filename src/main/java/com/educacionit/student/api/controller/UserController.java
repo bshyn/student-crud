@@ -1,7 +1,7 @@
-package com.educaciont.student.api.controller;
+package com.educacionit.student.api.controller;
 
-import com.educaciont.student.api.entity.UserEntity;
-import com.educaciont.student.api.repository.UserRepository;
+import com.educacionit.student.api.entity.UserEntity;
+import com.educacionit.student.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

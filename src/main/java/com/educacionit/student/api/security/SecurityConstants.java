@@ -1,4 +1,4 @@
-package com.educaciont.student.api.security;
+package com.educacionit.student.api.security;
 
 public class SecurityConstants {
     public static final String SECRET = "SecretKey123";

@@ -1,4 +1,4 @@
-package com.educaciont.student.api.security;
+package com.educacionit.student.api.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.educaciont.student.api.security.SecurityConstants.*;
+import static com.educacionit.student.api.security.SecurityConstants.*;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 

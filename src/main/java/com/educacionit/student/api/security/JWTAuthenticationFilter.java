@@ -1,8 +1,8 @@
-package com.educaciont.student.api.security;
+package com.educacionit.student.api.security;
 
-import com.educaciont.student.api.entity.UserEntity;
+import com.educacionit.student.api.entity.UserEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,10 +21,10 @@ import java.util.Date;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
-import static com.educaciont.student.api.security.SecurityConstants.EXPIRATION_TIME;
-import static com.educaciont.student.api.security.SecurityConstants.HEADER_STRING;
-import static com.educaciont.student.api.security.SecurityConstants.SECRET;
-import static com.educaciont.student.api.security.SecurityConstants.TOKEN_PREFIX;
+import static com.educacionit.student.api.security.SecurityConstants.EXPIRATION_TIME;
+import static com.educacionit.student.api.security.SecurityConstants.HEADER_STRING;
+import static com.educacionit.student.api.security.SecurityConstants.SECRET;
+import static com.educacionit.student.api.security.SecurityConstants.TOKEN_PREFIX;
 
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -39,8 +39,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse resp){
         try{
             UserEntity credentials = new ObjectMapper().readValue(req.getInputStream(), UserEntity.class);
-
-            System.out.println("Attempt " + credentials.getUsername() + ": " + credentials.getPassword());
+            
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             credentials.getUsername(),

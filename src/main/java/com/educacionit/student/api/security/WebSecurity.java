@@ -1,6 +1,7 @@
-package com.educaciont.student.api.security;
+package com.educacionit.student.api.security;
 
-import com.educaciont.student.api.service.impl.UserDetailsServiceImpl;
+import com.educacionit.student.api.security.JWTAuthenticationFilter;
+import com.educacionit.student.api.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -14,7 +15,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import static com.educaciont.student.api.security.SecurityConstants.SIGN_UP_URL;
+import static com.educacionit.student.api.security.SecurityConstants.SIGN_UP_URL;
 
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {

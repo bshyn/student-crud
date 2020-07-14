@@ -2,8 +2,11 @@ package com.educacionit.student.api.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.educacionit.student.api.entity.RoleEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -14,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import static com.educacionit.student.api.security.SecurityConstants.*;
 
@@ -44,13 +50,24 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = req.getHeader(HEADER_STRING);
         if(token != null){
 
-            String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
+            DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                     .build()
-                    .verify(token.replace(TOKEN_PREFIX, ""))
-                    .getSubject();
+                    .verify(token.replace(TOKEN_PREFIX, ""));
+
+            List<String> authorities = Arrays.asList(decodedJWT.getClaim(AUTHORITIES_KEY).as(String.class).split(","));
+
+            List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
+
+            authorities.forEach((authority) ->
+                    grantedAuthorities.add(
+                            new SimpleGrantedAuthority(authority)
+                    )
+            );
+
+            String user = decodedJWT.getSubject();
 
             if(user != null){
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+                return new UsernamePasswordAuthenticationToken(user, null, grantedAuthorities);
             }
             return null;
         }

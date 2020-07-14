@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.educacionit.student.api.model.StudentModel;
@@ -18,11 +19,10 @@ import com.educacionit.student.api.service.IStudentService;
 @RequestMapping ("students")
 public class StudentController {
 
-
     @Autowired
     private IStudentService<StudentModel> service;
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping (method = RequestMethod.GET)
     public ResponseEntity<?> getAll () {
 
@@ -41,6 +41,7 @@ public class StudentController {
         return ResponseEntity.ok (model);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping (method = RequestMethod.POST)
     public ResponseEntity<?> create (@RequestBody StudentModel model) {
         this.service.create (model);

@@ -1,5 +1,6 @@
 package com.educacionit.student.api.exception;
 
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -42,6 +43,16 @@ public class RestExceptionHandler {
     })
     @ResponseBody
     public ErrorMessage badRequest(Exception ex, HttpServletRequest request){
+        return new ErrorMessage(ex, request.getRequestURI());
+    }
+
+    @ResponseStatus(UNAUTHORIZED)
+    @ExceptionHandler({
+            UnauthorizedException.class,
+            AccessDeniedException.class
+    })
+    @ResponseBody
+    public ErrorMessage unauthorizedRequest(Exception ex, HttpServletRequest request){
         return new ErrorMessage(ex, request.getRequestURI());
     }
 

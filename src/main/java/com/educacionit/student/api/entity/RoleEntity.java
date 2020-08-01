@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ROLES")
+@Table(name = "APP_ROLE")
 @Getter @Setter
 @NoArgsConstructor
 public class RoleEntity {
@@ -15,6 +15,7 @@ public class RoleEntity {
     @Id
     private int id;
 
+    @Column(name = "ROLE_NAME")
     private String name;
 
 

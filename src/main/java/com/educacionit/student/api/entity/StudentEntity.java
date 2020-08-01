@@ -3,12 +3,8 @@ package com.educacionit.student.api.entity;
 
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.educacionit.student.api.model.StudentModel;
@@ -22,10 +18,12 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 @Entity (name="Student")
-@Table (name="STUDENTS")
+@Table (name="STUDENT")
 public class StudentEntity {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @NotEmpty(message = "Dni shouldn't be empty")
     @Size(min = 5, max = 15)
     private String dni;

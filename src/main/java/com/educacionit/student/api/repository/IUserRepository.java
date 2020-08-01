@@ -13,10 +13,10 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
     UserEntity findByUsername(String username);
 
     @Modifying @Transactional
-    @Query(value= "INSERT INTO USER_ROLES(USER_ID, ROLE_ID) VALUES (:USER_ID, 1)", nativeQuery = true)
+    @Query(value= "INSERT INTO STUDENT_CRUD.USER_ROLE(USER_ID, ROLE_ID) VALUES (:USER_ID, 1)", nativeQuery = true)
     void addUserRole(@Param("USER_ID") long userId);
 
     @Modifying @Transactional
-    @Query(value= "INSERT INTO USER_ROLES(USER_ID, ROLE_ID) VALUES (:USER_ID, 2)", nativeQuery = true)
+    @Query(value= "INSERT INTO STUDENT_CRUD.USER_ROLE(USER_ID, ROLE_ID) VALUES (:USER_ID, 2)", nativeQuery = true)
     void addAdminRole(@Param("USER_ID") long userId);
 }

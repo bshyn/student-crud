@@ -47,7 +47,7 @@ public class StudentServiceImpl implements IStudentService<StudentModel> {
     @Override
     public StudentModel findByDni (String dni){
 
-        Optional<StudentEntity> optional = this.repository.findById(dni);
+        Optional<StudentEntity> optional = this.repository.findByDni(dni);
          if(optional.isPresent()){
              StudentModel model = new StudentModel(optional.get());
              return model;
@@ -59,7 +59,7 @@ public class StudentServiceImpl implements IStudentService<StudentModel> {
 
     @Override
     public void create (StudentModel model){
-        Optional<StudentEntity> optional = this.repository.findById(model.getDni());
+        Optional<StudentEntity> optional = this.repository.findByDni(model.getDni());
 
         if (optional.isPresent()){
             throw new ConflictException(
@@ -79,7 +79,7 @@ public class StudentServiceImpl implements IStudentService<StudentModel> {
 
     @Override
     public void update (StudentModel model){
-        Optional<StudentEntity> optional = this.repository.findById (model.getDni());
+        Optional<StudentEntity> optional = this.repository.findByDni (model.getDni());
 
         if(optional.isPresent()){
             StudentEntity entity = new StudentEntity(model);
@@ -99,7 +99,7 @@ public class StudentServiceImpl implements IStudentService<StudentModel> {
 
     @Override
     public void delete (String dni){
-            Optional<StudentEntity> optional = this.repository.findById(dni);
+            Optional<StudentEntity> optional = this.repository.findByDni(dni);
 
         if (optional.isPresent()){
             this.repository.deleteById(dni);

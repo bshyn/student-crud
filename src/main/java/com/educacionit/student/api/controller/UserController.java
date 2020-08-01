@@ -1,7 +1,7 @@
 package com.educacionit.student.api.controller;
 
-import com.educacionit.student.api.entity.RoleEntity;
 import com.educacionit.student.api.entity.UserEntity;
+import com.educacionit.student.api.model.UserModel;
 import com.educacionit.student.api.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @RestController
 @RequestMapping("users")
@@ -24,7 +22,9 @@ public class UserController {
     private BCryptPasswordEncoder passwordEncoder;
 
     @PostMapping("/sign-up")
-    public ResponseEntity<?> signUp(@RequestBody UserEntity user){
+    public ResponseEntity<?> signUp(@RequestBody UserModel userModel){
+
+        UserEntity user = new UserEntity(userModel);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userService.save(user);
